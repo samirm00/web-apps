@@ -11,7 +11,33 @@ You don't have to worry about making this algorithm work fast! The idea is to ge
 "think" like a computer and practice your knowledge of basic JavaScript.
 */
 
-function sortAges(arr) { }
+function sortAges(arr) {
+  let arrayOfNumber = [];
+  arr.forEach((item) => {
+    if (typeof item === "number") {
+      arrayOfNumber.push(item);
+    }
+  });
+
+  let sortingArray = (arraySort) => {
+    let done = false;
+    while (!done) {
+      done = true;
+      for (let i = 1; i < arraySort.length; i++) {
+        if (arraySort[i - 1] > arraySort[i]) {
+          done = false;
+          let temp = arraySort[i - 1];
+          arraySort[i - 1] = arraySort[i];
+          arraySort[i] = temp;
+        }
+      }
+    }
+
+    return arraySort;
+  };
+
+  return sortingArray(arrayOfNumber);
+}
 
 /* ======= TESTS - DO NOT MODIFY ===== */
 
@@ -65,6 +91,5 @@ test(
   "sortAges function works - case 2",
   arraysEqual(sortAges(agesCase2), [55, 60, 100])
 );
-
 
 // https://github.com/Migracode-Barcelona/exercises-js1/blob/master/week-3/Extra/8-sorting-algorithm.js

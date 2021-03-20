@@ -1,0 +1,41 @@
+{
+  "nextId": 8,
+  "animals": [
+    {
+      "id": 1,
+      "habitat": "sea",
+      "average_mass": 1200,
+      "is_extinct": false
+    },
+    {
+      "id": 2,
+      "habitat": "land",
+      "average_mass": 200,
+      "is_extinct": false
+    },
+    {
+      "id": 3,
+      "habitat": "forest",
+      "average_mass": 100,
+      "is_extinct": false
+    },
+    {
+      "id": 4,
+      "habitat": "sea",
+      "average_mass": 300,
+      "is_extinct": true
+    },
+    {
+      "id": 5,
+      "habitat": "space",
+      "average_mass": 3000,
+      "is_extinct": true
+    },
+    {
+      "id": 7,
+      "habitat": "land",
+      "average_mass": 10,
+      "is_extinct": true
+    }
+  ]
+}

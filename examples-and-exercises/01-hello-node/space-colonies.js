@@ -6,8 +6,16 @@
   NOTE: don't include any element that is not a "family".
 */
 
-function colonisers() {
+function colonisers(arr) {
+  let selectedFamilies = [];
 
+  arr.forEach((element) => {
+    if (element.includes("family") && element.charAt(0) === "A") {
+      selectedFamilies.push(element);
+    }
+  });
+
+  return selectedFamilies;
 }
 
 /* ======= TESTS - DO NOT MODIFY ===== */
@@ -24,27 +32,28 @@ const voyagers = [
   "Asimov",
   "Oscar family",
   "Avery family",
-  "Archer family"
+  "Archer family",
 ];
 
-const util = require('util');
+const util = require("util");
 
 function test(test_name, actual, expected) {
   let status;
   if (util.isDeepStrictEqual(actual, expected)) {
     status = "PASSED";
   } else {
-    status = `FAILED: expected: ${util.inspect(expected)} but your function returned: ${util.inspect(actual)}`;
+    status = `FAILED: expected: ${util.inspect(
+      expected
+    )} but your function returned: ${util.inspect(actual)}`;
   }
 
   console.log(`${test_name}: ${status}`);
 }
 
-test(
-  "colonisers function works",
-  colonisers(voyagers),
-  ["Adam family", "Avery family", "Archer family"]
-)
-
+test("colonisers function works", colonisers(voyagers), [
+  "Adam family",
+  "Avery family",
+  "Archer family",
+]);
 
 // https://github.com/Migracode-Barcelona/exercises-js1/blob/master/week-3/Extra/3-space-colonies.js

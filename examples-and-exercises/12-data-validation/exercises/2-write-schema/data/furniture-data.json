@@ -1,33 +1,68 @@
-[
-  {
-    "id": 2,
-    "materials": [
-      "stone"
-    ],
-    "type": "sofa",
-    "second_hand": false
-  },
-  {
-    "id": 3,
-    "materials": [],
-    "type": "table",
-    "second_hand": false
-  },
-  {
-    "id": 5,
-    "materials": [
-      "metal",
-      "plastic"
-    ],
-    "type": "chair"
-  },
-  {
-    "id": 6,
-    "materials": [
-      "wood",
-      "metal"
-    ],
-    "type": "desk",
-    "second_hand": true
-  }
-]
+{
+  "nextId": 11,
+  "furniture": [
+    {
+      "materials": [
+        "stone"
+      ],
+      "type": "table",
+      "second_hand": false,
+      "id": 1
+    },
+    {
+      "id": 2,
+      "materials": [],
+      "type": "table",
+      "second_hand": false
+    },
+    {
+      "id": 5,
+      "materials": [
+        "metal",
+        "plastic"
+      ],
+      "type": "chair"
+    },
+    {
+      "id": 6,
+      "materials": [
+        "wood",
+        "metal"
+      ],
+      "type": "desk",
+      "second_hand": true
+    },
+    {
+      "id": 7,
+      "materials": [
+        "wood"
+      ],
+      "type": "table",
+      "second_hand": false
+    },
+    {
+      "id": 8,
+      "materials": [
+        "wood"
+      ],
+      "type": "table",
+      "second_hand": false
+    },
+    {
+      "id": 9,
+      "materials": [
+        "wood"
+      ],
+      "type": "table",
+      "second_hand": true
+    },
+    {
+      "id": 10,
+      "materials": [
+        "metal"
+      ],
+      "type": "table",
+      "second_hand": true
+    }
+  ]
+}

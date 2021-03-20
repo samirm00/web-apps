@@ -1,35 +1,36 @@
-'use strict';
+"use strict";
 
-const express = require('express');
-const bodyParser = require('body-parser');
-const morgan = require('morgan');
-const cors = require('cors');
-const fs = require('fs');
-const path = require('path');
-const config = require('./config');
+const express = require("express");
+const bodyParser = require("body-parser");
+const morgan = require("morgan");
+const cors = require("cors");
+const fs = require("fs");
+const path = require("path");
+const config = require("./config");
 
+const app = express();
+app.use(express.json());
 // - setup -
-const FILES_DIR = __dirname + '/text-files';
+const FILES_DIR = __dirname + "/text-files";
 // create the express app
-_;
 
 // - use middleware -
 // allow Cross Origin Resource Sharing
 app.use(cors());
 // parse the body
-_;
+app.use(bodyParser.json());
 
 // https://github.com/expressjs/morgan#write-logs-to-a-file
 const accessLogStream = fs.createWriteStream(
-  path.join(__dirname, 'access.log'),
-  { flags: 'a' }
+  path.join(__dirname, "access.log"),
+  { flags: "a" }
 );
-app.use(morgan('combined', { stream: accessLogStream }));
+app.use(morgan("combined", { stream: accessLogStream }));
 // and log to the console
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 
 // statically serve the frontend
-_;
+app.use(express.static("public"));
 
 // - declare routes -
 // helpful hint:
@@ -41,11 +42,11 @@ _;
 // read all file names
 //  called in init.js
 //  redirected to by other routes
-app.get('/files', (req, res, next) => {
+app.get("/files", (req, res, next) => {
   fs.readdir(FILES_DIR, (err, list) => {
-    if (err && err.code === 'ENOENT') {
+    if (err && err.code === "ENOENT") {
       res.status(404).end();
-      _;
+      return;
     }
     if (err) {
       // https://expressjs.com/en/guide/error-handling.html
@@ -59,16 +60,16 @@ app.get('/files', (req, res, next) => {
 
 // read a file
 //  called by action: fetchAndLoadFile
-app._('_', (req, res, next) => {
-  const fileName = req.params.name;
-  fs._(`${FILES_DIR}/${fileName}`, _, (err, fileText) => {
-    if (_) {
-      _;
+app.get("/files/:fileName", (req, res, next) => {
+  const fileName = req.params.fileName;
+  fs.readFile(`${FILES_DIR}/${fileName}`, "utf-8", (err, fileText) => {
+    if (err) {
+      console.error(err);
       return;
     }
-    if (_) {
-      _;
-      _;
+    if (!fileName) {
+      console.log("the file does not  existed");
+      return;
     }
 
     const responseData = {
@@ -81,38 +82,43 @@ app._('_', (req, res, next) => {
 
 // write a file
 //  called by action: saveFile
-app._('_', (req, res, next) => {
-  const fileName = _; // read from params
-  const fileText = _; // read from body
-  fs._(`${FILES_DIR}/${fileName}`, _, err => {
-    if (_) {
-      _;
-      _;
+app.post("/files/:fileName", (req, res, next) => {
+  const fileName = req.params.fileName; // read from params
+  const fileText = req.body.text; // read from body
+  console.log(req.body.text);
+  fs.writeFile(`${FILES_DIR}/${fileName}`, fileText, (err) => {
+    if (err) {
+      console.err(err);
+      return;
     }
 
     // https://stackoverflow.com/questions/33214717/why-post-redirects-to-get-and-put-redirects-to-put
-    res.redirect(303, '/files');
+    res.redirect(303, "/files");
   });
 });
 
 // delete a file
 //  called by action: deleteFile
-app._('_', (req, res, next) => {
-  const fileName = _; // read from params
-  fs._(`${FILES_DIR}/${fileName}`, err => {
-    if (_) {
-      _;
-      _;
+app.delete("/files/:fileName", (req, res, next) => {
+  const fileName = req.params.fileName; // read from params
+  fs.readFile(`${FILES_DIR}/${fileName}`, (err) => {
+    if (err) {
+      console.error(err);
+      return;
     }
-    if (_) {
-      _;
-      _;
+    if (!fileName) {
+      console.log("the file name is required");
+      return;
     }
-
-    res.redirect(303, '/files');
+    fs.unlink(`${FILES_DIR}/${fileName}`, (err) => {
+      if (err) {
+        req.statusCode(500).send(err);
+      }
+      console.log("The file has been deleted successfully!");
+    });
+    res.redirect(303, "/files");
   });
 });
-
 
 // - handle errors in the routes and middleware -
 //  this works, nothing to change!
@@ -125,4 +131,6 @@ app.use(function (err, req, res, next) {
 
 // - open server -
 // try to exactly match the message logged by demo.min.js
-_;
+// set port environments
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Listening on port ${PORT}  ...`));

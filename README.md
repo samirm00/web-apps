@@ -262,7 +262,7 @@ Don't worry if you don't understand everything in this project. The tutorial cov
 Just copying his code is not all! After finishing with the tutorial you will need to refactor the code so that It reads and writes from a file called `courses.json` instead of using a local variable. ie:
 
 1. ```js
-   app.post('/api/courses', (req, res) => {
+   app.post("/api/courses", (req, res) => {
      const { error } = validateCourse(req.body);
      if (error) return res.status(400).send(error.details[0].message);
      const course = {
@@ -275,7 +275,7 @@ Just copying his code is not all! After finishing with the tutorial you will nee
    ```
 1. ```js
    // there are some mistakes in this, we can't give it all away ;)
-   app.post('/api/courses', (req, res) => {
+   app.post("/api/courses", (req, res) => {
      const { error } = validateCourse(req.body);
      if (error) {
        return res.status(400).send(error.details[0].message);
@@ -291,8 +291,8 @@ Just copying his code is not all! After finishing with the tutorial you will nee
          name: req.body.name,
        };
        parsedCourses.push(course);
-       const stringifiedCourses = JSON.parse(parsedCourses, null, '  ');
-       fs.readFile(COURSES_PATH, parsedCourses, err => {
+       const stringifiedCourses = JSON.parse(parsedCourses, null, "  ");
+       fs.readFile(COURSES_PATH, parsedCourses, (err) => {
          if (err) {
            res.status(500).send(err.message);
            return;

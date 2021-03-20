@@ -9,18 +9,19 @@
 */
 
 // require dependencies
-const assert = require('assert');
-const fs = require('fs');
+const assert = require("assert");
+const fs = require("fs");
 
 // declare constants
 const START = Date.now();
-const FILE_PATH = __dirname + '/file.json';
+const FILE_PATH = __dirname + "/file.json";
 
 // declare logging function
-const log = (logId, value) => console.log(
-  `\nlog ${logId}, ${Date.now() - START} ms: ${typeof value}\n`,
-  value
-);
+const log = (logId, value) =>
+  console.log(
+    `\nlog ${logId}, ${Date.now() - START} ms: ${typeof value}\n`,
+    value
+  );
 
 // --- main script ---
 
@@ -30,34 +31,31 @@ const objectToSave = {
   flamingo: undefined,
   completed: true,
   render: function () {
-    return this.todoText + ': ' + this.completed;
-  }
+    return this.todoText + ": " + this.completed;
+  },
 };
 log(1, objectToSave);
 
 // https://javascript.info/json#json-stringify
-const stringToSave = _._(_, _, _);
+const stringToSave = JSON.stringify(objectToSave, null, " ");
 log(2, stringToSave);
 
 // sync
-log(3, 'writing file ...');
+log(3, "writing file ...");
 fs.writeFileSync(FILE_PATH, stringToSave);
 
-
-
 // async
-const fileText = fs.readFileSync(FILE_PATH, 'utf-8', readFileCallback);
-log(4, 'reading file ...');
-
+const fileText = fs.readFileSync(FILE_PATH, "utf-8");
+log(4, "reading file ...");
 
 log(5, fileText);
 assert.strictEqual(fileText, stringToSave);
 
 const parsedFileContents = JSON.parse(fileText);
 log(6, parsedFileContents);
-assert.deepStrictEqual(
-  parsedFileContents,
-  { _ }
-);
+assert.deepStrictEqual(parsedFileContents, {
+  todoText: "1234",
+  completed: true,
+});
 
-log(7, '\033[32mpass!\x1b[0m');
+log(7, "\033[32mpass!\x1b[0m");

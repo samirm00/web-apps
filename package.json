@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/HackYourFutureBelgium/web-apps/issues"
   },
-  "homepage": "https://github.com/HackYourFutureBelgium/web-apps"
+  "homepage": "https://github.com/HackYourFutureBelgium/web-apps",
+  "dependencies": {
+    "yargs": "^16.2.0"
+  }
 }

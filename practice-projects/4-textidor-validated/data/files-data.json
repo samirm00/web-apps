@@ -1,14 +1,25 @@
 {
-  "nextId": 5,
+  "nextId": 8,
   "files": [
     {
-      "id": 3,
-      "name": "elif.txt",
-      "text": "!txet"
+      "id": 1,
+      "name": "file1.txt",
+      "text": "hello file1"
     },
     {
-      "name": "t.tst",
-      "id": 4
+      "id": 2,
+      "name": "hello.txt",
+      "text": "hello there !"
+    },
+    {
+      "id": 3,
+      "name": "file3.txt",
+      "text": "hello file3"
+    },
+    {
+      "id": 4,
+      "name": "file4.txt",
+      "text": "delete me soon"
     }
   ]
 }

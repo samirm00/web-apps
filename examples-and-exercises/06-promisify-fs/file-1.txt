@@ -1,1 +1,1 @@
-written by example with async/await
+written by example with promises
